@@ -53,7 +53,7 @@ AppAsset::register($this);
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand hidden-sm" href="http://www.bootcss.com">Bootstrap中文网</a>
+            <a class="navbar-brand hidden-sm" href="/">首页</a>
         </div>
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav">
@@ -70,6 +70,9 @@ AppAsset::register($this);
                     <li><a href="<?= Url::to(['site/login']) ?>" target="_blank">Login</a></li>
                 <?php else: ?>
                     <li><a href="<?= Url::to(['site/logout']) ?>">Logout</a></li>
+                    <?php if (Yii::$app->getUser()->identity->email == 'maoxingpei8686@163.com') :?>
+                        <li><a href="<?= Url::to(['default/edit']) ?>"><i class="fa fa-edit">MarkDown</i></a></li>
+                    <?php endif; ?>
                 <?php endif; ?>
             </ul>
         </div>

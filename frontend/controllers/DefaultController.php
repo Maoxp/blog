@@ -8,6 +8,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Article;
 use common\models\User;
 use frontend\dao\Common;
 use Yii;
@@ -34,11 +35,28 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function actionDetail()
+    public function actionEdit()
     {
-        return $this->render('detail',[
-            'js_list' => ['resource/editormd/editormd.min.js', "js/editormd.js"],
-            'css_list' => ['resource/editormd/css/editormd.min.css'],
+        $model = Article::findOne(1);
+        return $this->render('edit',[
+            'js_list' => [],
+            'css_list' => [],
+            "model" => $model
+        ]);
+    }
+
+    /**
+     * use
+     * @param $id
+     * @return string
+     */
+    public function actionDetail($id)
+    {
+        $model = Article::findOne(1);
+        return $this->render("detail",[
+            "js_list" => [],
+            "css_list" => [],
+            "model" => $model
         ]);
     }
 }
