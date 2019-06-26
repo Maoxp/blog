@@ -14,16 +14,14 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'resource/bootstrap/css/bootstrap.min.css',
-        'css/clean-blog.min.css',
+        'resource/font-awesome/css/font-awesome.min.css',
+        'css/site.min.css',
     ];
     public $js = [
         'resource/jquery/jquery.min.js',
-        'resource/bootstrap/js/bootstrap.bundle.min.js',
-        'js/clean-blog.min.js',
-
+        'resource/bootstrap/js/bootstrap.min.js',
     ];
 
-    //popper.js
     public $depends = [
 //        'yii\web\YiiAsset',
 //        'yii\bootstrap\BootstrapAsset',
