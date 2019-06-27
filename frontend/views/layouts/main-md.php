@@ -44,7 +44,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <!-- Navigation -->
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse" style="margin-top: -30px">
     <div class="container">
         <div class="navbar-header">
             <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
@@ -75,33 +75,7 @@ AppAsset::register($this);
         </div>
     </div>
 </div>
-<!-- Page Header -->
-
-<style>
-    .overlay {
-        position: absolute; top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background-color: #212529;
-        opacity: .5;
-    }
-</style>
-<div class="jumbotron masthead" style="background-image: url(<?= Url::home() . 'img/home-bg.jpg' ?>)">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <h1>Clean Blog</h1>
-            <p>海阔凭鱼跃，天高任鸟飞</p>
-            <ul class="masthead-links">
-                <li>
-                    <span>海阔凭鱼跃，天高任鸟飞</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="bc-social">
+<div class="bc-social" style="margin-top: -17px;">
     <div class="container">
         <ul class="bc-social-buttons">
             <li class="social-forum">
@@ -119,16 +93,6 @@ AppAsset::register($this);
 
 <?= $content ?>
 
-
-<footer class="navbar-default footer ">
-    <div class="container">
-        <ul class="list-inline text-center">
-            <li><a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备11008151号</a></li>
-            <li>京公网安备11010802014853</li>
-        </ul>
-
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>

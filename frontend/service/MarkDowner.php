@@ -6,7 +6,7 @@
  * Time: 14:34
  */
 
-namespace frontend\dao;
+namespace frontend\service;
 
 use Parsedown;
 use League\HTMLToMarkdown\HtmlConverter;

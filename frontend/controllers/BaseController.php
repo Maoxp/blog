@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use frontend\dao\Common;
+use frontend\service\Common;
 use Yii;
 use yii\web\Controller;
 use yii\helpers\Url;

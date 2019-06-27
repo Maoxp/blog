@@ -42,7 +42,7 @@ if (isset($css_list)) {
         <div class="col-lg-8 col-md-10 mx-auto">
             <?php foreach ($rows as $key => $row): ?>
                 <div class="post-preview">
-                    <a href="<?= Url::to(['default/detail'])?>" class="post-title">
+                    <a href="<?= Url::to(['default/detail', "id"=> $row['id']])?>" class="post-title">
                         <h3><?= $row['title']?></h3>
                     </a>
                     <p class="author-created"><?= date('Y-m-d', $row['created'])?>· 旭尧 </p>

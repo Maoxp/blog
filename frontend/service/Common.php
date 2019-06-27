@@ -5,11 +5,10 @@
  * Date: 2019/6/25
  * Time: 15:24
  */
-namespace frontend\dao;
+namespace frontend\service;
 
 use Yii;
 use yii\data\Pagination;
-use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
 trait Common
