@@ -34,15 +34,15 @@ MarkdowneditorAssets::register($this);
                 <?php $form = ActiveForm::begin(); ?>
                 <div class="form-group">
                     <label for="" class="control-label">标题</label>
-                    <input type="text" class="form-control" value="">
+                    <input type="text" class="form-control" name="title" value="<?= $keyword['title'] ?? ''?>">
                 </div>
                 <div class="form-group">
                     <label for="" class="control-label">摘要</label>
-                    <input type="text" class="form-control" value="">
+                    <input type="text" class="form-control" name="subtitle" value="<?= $keyword['subtitle'] ?? ''?>">
                 </div>
                 <label for="" class="control-label">内容</label>
                 <div class="form-group" id="editor">
-                    <textarea style="display:none;" name="editor-markdown-code"></textarea>
+                    <textarea style="display:none;" name="editor_markdown_code"><?= $keyword['content'] ?? ''?></textarea>
                 </div>
                 <div class="form-group">
                     <?= Html::submitButton('提交', ['class' => 'btn btn-success']) ?>
@@ -67,7 +67,7 @@ $(function() {
              /**设置主题颜色*/
             editorTheme: "default",
             theme: "simple",         //工具栏主题 ["default", "dark"]
-            previewTheme: "dark",           //预览主题  ["default", "dark"]
+            previewTheme: "default",           //预览主题  ["default", "dark"]
             // editorTheme: "pastel-on-white",      //编辑主题
             imageUpload : true, 
             imageFormats : ["jpg","jpeg","gif","png","bmp","webp"], 

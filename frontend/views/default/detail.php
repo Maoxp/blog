@@ -7,7 +7,6 @@ $this->title = '查看';
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
 use frontend\service\MarkDowner;
-use common\models\Article;
 
 AppAsset::register($this);
 
@@ -26,6 +25,11 @@ $markdown = new MarkDowner();
 <!-- Main Content -->
 <div class="container">
     <h1 style="font-weight: 600"><?= $model->title?></h1>
+    <?php if (!Yii::$app->getUser()->isGuest):?>
+    <div>
+        <a href="<?= Url::to(['home/edit-md', 'id' => $model->id])?>" role="button"  class="btn btn-success"> <i class="fa fa-edit"></i>在线修改</a>
+    </div>
+    <?php endif; ?>
     <ul class="list-inline dot-divider post-meta">
         <li class="list-inline-item text-small text-muted">
            2019-06-27

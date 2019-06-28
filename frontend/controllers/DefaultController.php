@@ -8,8 +8,7 @@
 
 namespace frontend\controllers;
 
-use common\models\Article;
-use common\models\User;
+use frontend\dao\ArticleDao;
 use frontend\service\Common;
 use frontend\service\Uploader;
 use Yii;
@@ -36,26 +35,39 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function actionEditWidget()
-    {
-        $model = Article::findOne(1);
-        return $this->render('edit-widget',[
-            'js_list' => [],
-            'css_list' => [],
-            "model" => $model
-        ]);
-    }
-
-    public function actionEditMd()
-    {
-        $this->layout="main-md.php";
-        $model = Article::findOne(1);
-        return $this->render('edit-md',[
-            'js_list' => ["resource/editormd/editormd.js"],
-            'css_list' => ["resource/editormd/css/editormd.min.css"],
-            "model" => $model
-        ]);
-    }
+//    public function actionEditWidget()
+//    {
+//        $model = Article::findOne(1);
+//        return $this->render('edit-widget',[
+//            'js_list' => [],
+//            'css_list' => [],
+//            "model" => $model
+//        ]);
+//    }
+//
+//    public function actionEditMd()
+//    {
+//        if (Yii::$app->request->isPost) {
+//            $data = Yii::$app->request->post();
+//            $title = $data['title'];
+//            $subtitle = $data['subtitle'];
+//            $editor_markdown_code = $data['editor_markdown_code'];
+//            ArticleDao::add([
+//                "title" => $title,
+//                "subtitle" => $subtitle,
+//                "content" => $editor_markdown_code,
+//                "author" => Yii::$app->user->identity->username,
+//                "author_uid" => Yii::$app->user->id,
+//                "created" => time(),
+//            ]);
+//        }
+//
+//        $this->layout="main-md.php";
+//        return $this->render('edit-md',[
+//            'js_list' => ["resource/editormd/editormd.js"],
+//            'css_list' => ["resource/editormd/css/editormd.min.css"],
+//        ]);
+//    }
 
     /**
      * 文章详情
@@ -64,9 +76,9 @@ class DefaultController extends Controller
      */
     public function actionDetail($id)
     {
-        $model = Article::findOne($id);
-        $front_model = Article::findOne($id-1);
-        $back_model = Article::findOne($id+1);
+        $model = ArticleDao::findOne($id);
+        $front_model = ArticleDao::findOne($id-1);
+        $back_model = ArticleDao::findOne($id+1);
 
         return $this->render("detail",[
             "js_list" => [],

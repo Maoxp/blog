@@ -7,8 +7,6 @@ use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\models\LoginForm;
 
 
@@ -42,7 +40,6 @@ class SiteController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
         if (Yii::$app->request->isPost) {
             $model = new LoginForm();
             $model->username = Yii::$app->request->post("username");
@@ -82,7 +79,6 @@ class SiteController extends Controller
             $model->username = $data['name'];
             $model->email = $data['email'];
             $model->password = $data['password'];
-            return json_encode(['status' => 1, "msg" => '注册成功，请查看收邮件认证!']);
             if ($model->signup()) {
                 return json_encode(['status' => 1, "msg" => '注册成功，请查看收邮件认证!']);
 //                return $this->renderFile("@frontend/views/notification.php", [

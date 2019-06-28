@@ -68,7 +68,7 @@ AppAsset::register($this);
                 <?php else: ?>
                     <li><a href="<?= Url::to(['site/logout']) ?>">Logout</a></li>
                     <?php if (Yii::$app->getUser()->identity->email == 'maoxingpei8686@163.com') :?>
-                        <li><a href="<?= Url::to(['default/edit-md']) ?>"><i class="fa fa-edit">MarkDown</i></a></li>
+                        <li><a href="<?= Url::to(['home/edit-md']) ?>" target="_blank"><i class="fa fa-edit">MarkDown</i></a></li>
                     <?php endif; ?>
                 <?php endif; ?>
             </ul>
