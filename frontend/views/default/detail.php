@@ -45,7 +45,7 @@ $markdown = new MarkDowner();
     </ul>
     <div class="row" style=" font-size: 15px !important;">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <div>
+            <div id="markdown">
                 <?php
                 echo $markdown->convertMarkdownToHtml($model->content);
                 ?>
@@ -71,5 +71,16 @@ $markdown = new MarkDowner();
         </div>
     </div>
 </div>
+
+
+<?php
+$js = <<<js
+$(function() {
+    $("#markdown table").addClass("table table-bordered table-hover table-condensed");
+});
+js;
+
+$this->registerJs($js);
+?>
 
 

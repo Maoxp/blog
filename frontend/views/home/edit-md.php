@@ -9,8 +9,6 @@ use yii\helpers\Url;
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use ijackua\lepture\Markdowneditor;
-use ijackua\lepture\MarkdowneditorAssets;
 
 AppAsset::register($this);
 
@@ -24,7 +22,6 @@ if (isset($css_list)) {
         AppAsset::addCss($this, Url::home() . $href);
     }
 }
-MarkdowneditorAssets::register($this);
 ?>
 <!-- Main Content -->
 <div class="container">

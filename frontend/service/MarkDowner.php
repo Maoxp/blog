@@ -41,7 +41,7 @@ class MarkDowner
      */
     public function convertMarkdownToHtml($markdown)
     {
-        return $this->markdownConverter->setBreaksEnabled(true)->text($markdown);
+        return $this->markdownConverter->setMarkupEscaped(true)->setBreaksEnabled(true)->text($markdown);
     }
 
     /**
