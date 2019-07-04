@@ -6,9 +6,9 @@ $this->title = '编辑';
 
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
-
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\web\View;
+//use yii\helpers\Html;
+//use yii\widgets\ActiveForm;
 
 AppAsset::register($this);
 
@@ -27,63 +27,100 @@ if (isset($css_list)) {
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12 mx-auto">
-            <div style="margin-top: 100px;">
-                <?php $form = ActiveForm::begin(); ?>
-                <div class="form-group">
-                    <label for="" class="control-label">标题</label>
-                    <input type="text" class="form-control" name="title" value="<?= $keyword['title'] ?? ''?>">
-                </div>
-                <div class="form-group">
-                    <label for="" class="control-label">摘要</label>
-                    <input type="text" class="form-control" name="subtitle" value="<?= $keyword['subtitle'] ?? ''?>">
-                </div>
-                <label for="" class="control-label">内容</label>
-                <div class="form-group" id="editor">
-                    <textarea style="display:none;" name="editor_markdown_code"><?= $keyword['content'] ?? ''?></textarea>
-                </div>
-                <div class="form-group">
-                    <?= Html::submitButton('提交', ['class' => 'btn btn-success']) ?>
-                </div>
-                <?php ActiveForm::end(); ?>
+            <div style="float: right">
+                <!-- 按钮触发模态框 -->
+                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">append归档标签</button>
             </div>
+            <div style="margin-top: 100px;">
+                <form action="/home/edit-md" method="post">
+                    <div class="form-group">
+                        <label for="" class="control-label">标题</label>
+                        <input type="text" class="form-control" name="title" required
+                               value="<?= $keyword['title'] ?? '' ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label">摘要</label>
+                        <input type="text" class="form-control" name="subtitle" required
+                               value="<?= $keyword['subtitle'] ?? '' ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label">标签</label>
+                    </div>
+                    <label for="" class="control-label">内容</label>
+                    <div class="form-group" id="editor">
+                    <textarea style="display:none;"
+                              name="editor_markdown_code"><?= $keyword['content'] ?? '' ?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success">提交</button>
+                    </div>
+                </form>
+            </div>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">归档标签</h4>
+                        </div>
+                        <form class="form-horizontal" role="form">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">归档标签</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="tagName" value=""
+                                               placeholder="标签：PHP">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" id="tag-form">确定</button>
+                            </div>
+                        </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+            <!-- 模态框（Modal）END -->
         </div>
     </div>
 </div>
-
-
-
-
-<?php
-$js = <<<js
-$(function() {
-        var editor = editormd("editor", {
-            placeholder:'本编辑器支持Markdown编辑，左边编写，右边预览',  //默认显示的文字，这里就不解释了
-            // width: "90%",
-            height: 940,
-            syncScrolling: "single",
-             /**设置主题颜色*/
-            editorTheme: "default",
-            theme: "simple",         //工具栏主题 ["default", "dark"]
-            previewTheme: "default",           //预览主题  ["default", "dark"]
-            // editorTheme: "pastel-on-white",      //编辑主题
-            imageUpload : true, 
-            imageFormats : ["jpg","jpeg","gif","png","bmp","webp"], 
-            imageUploadURL : "/default/upload",       //上传图片使用方法
-            saveHTMLToTextarea: true,
-            emoji: true,
-            taskList: true, 
-            tocm: true,                  // Using [TOCM]
-            tex: true,                   // 开启科学公式TeX语言支持，默认关闭
-            // htmlDecode:"style,script,iframe",
-            // flowChart: false,             // 开启流程图支持，默认关闭
-//            sequenceDiagram: false,       // 开启时序/序列图支持，默认关闭
-            // markdown: "",     // dynamic set Markdown text
-            path : "../../resource/editormd/lib/"  // Autoload modules mode, codemirror, marked... dependents libs path
+<script>
+<?php $this->beginBlock('js_end') ?>
+    $(function() {
+        $("#tag-form").click(function() {
+            let tagName = $("input[name='tagName']").val();
+            if (tagName === '') {
+                Swal({title: "温馨提醒", html: "<h5>标签不能为空!</h5>", type: "warning"})
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/home/tag-add/",
+                    data: {"tagName": tagName},
+                    dataType: "json",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.status) {
+                            Swal({title: "温馨提醒", html: "<h5>" + res.msg + "</h5>", type: "success"}).then((result) => {
+                                console.log(result);
+                                if (result.value) {
+                                    $('#myModal').modal('hide');
+                                }
+                            })
+                        } else {
+                            Swal({title: "温馨提醒", html: "<h5>" + res.msg + "</h5>", type: "error"})
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(XMLHttpRequest.readyState)
+                    }
+                });
+            }
         });
-        
     });
+<?php $this->endBlock(); ?>
+</script>
 
-js;
-
-$this->registerJs($js);
-?>
+<?php $this->registerJs($this->blocks['js_end'], View::POS_END); ?>

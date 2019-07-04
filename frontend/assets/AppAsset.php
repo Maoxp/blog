@@ -21,7 +21,8 @@ class AppAsset extends AssetBundle
     public $js = [
         'resource/jquery/jquery.min.js',
         'resource/bootstrap/js/bootstrap.min.js',
-//        'https://cdn.jsdelivr.net/npm/marked/marked.min.js'
+        'js/common.js',
+        'https://cdn.jsdelivr.net/npm/sweetalert2@7.32.4/dist/sweetalert2.all.min.js',
     ];
 
     public $depends = [

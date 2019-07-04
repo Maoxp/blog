@@ -91,8 +91,21 @@ AppAsset::register($this);
     </div>
 </div>
 
-<?= $content ?>
+<section class="content">
+    <?php
+    $message = Yii::$app->session->getFlash('message');
+    if (isset($message) && !empty($message)): ?>
+        <div class="alert alert-<?= $message['type'] ?>">
+            <a href="#" class="close" data-dismiss="alert">
+                &times;
+            </a>
+            <h4>温馨提示</h4>
+            <?= $message['msg'] ?>
+        </div>
+    <?php endif; ?>
 
+    <?= $content ?>
+</section>
 
 <?php $this->endBody() ?>
 </body>

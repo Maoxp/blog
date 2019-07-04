@@ -35,40 +35,6 @@ class DefaultController extends Controller
         ]);
     }
 
-//    public function actionEditWidget()
-//    {
-//        $model = Article::findOne(1);
-//        return $this->render('edit-widget',[
-//            'js_list' => [],
-//            'css_list' => [],
-//            "model" => $model
-//        ]);
-//    }
-//
-//    public function actionEditMd()
-//    {
-//        if (Yii::$app->request->isPost) {
-//            $data = Yii::$app->request->post();
-//            $title = $data['title'];
-//            $subtitle = $data['subtitle'];
-//            $editor_markdown_code = $data['editor_markdown_code'];
-//            ArticleDao::add([
-//                "title" => $title,
-//                "subtitle" => $subtitle,
-//                "content" => $editor_markdown_code,
-//                "author" => Yii::$app->user->identity->username,
-//                "author_uid" => Yii::$app->user->id,
-//                "created" => time(),
-//            ]);
-//        }
-//
-//        $this->layout="main-md.php";
-//        return $this->render('edit-md',[
-//            'js_list' => ["resource/editormd/editormd.js"],
-//            'css_list' => ["resource/editormd/css/editormd.min.css"],
-//        ]);
-//    }
-
     /**
      * 文章详情
      * @param $id
@@ -97,13 +63,21 @@ class DefaultController extends Controller
     {
         if (Yii::$app->request->isPost)
         {
-            $upfile = new Uploader("editormd-image-file");
-            $res = $upfile->do_load();
+            $upFile = new Uploader("editormd-image-file");
+            $res = $upFile->do_load();
             if ($res) {
-                return json_encode(['success' => 1, "message" => $upfile->stateInfo, "url" => Yii::$app->request->hostInfo.$res]);
+                return json_encode(['success' => 1, "message" => $upFile->stateInfo, "url" => Yii::$app->request->hostInfo.$res]);
             } else {
                 return json_encode(['success' => 0, "message" => "ok", "url" => ""]);
             }
         }
     }
+
+    //归档
+    public function actionList()
+    {
+
+    }
+
+
 }

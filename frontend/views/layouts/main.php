@@ -68,7 +68,7 @@ AppAsset::register($this);
                 <?php else: ?>
                     <li><a href="<?= Url::to(['site/logout']) ?>">Logout</a></li>
                     <?php if (Yii::$app->getUser()->identity->email == 'maoxingpei8686@163.com') :?>
-                        <li><a href="<?= Url::to(['home/edit-md']) ?>" target="_blank"><i class="fa fa-edit">MarkDown</i></a></li>
+                        <li><a href="<?= Url::to(['home/edit-md']) ?>"><i class="fa fa-edit">MarkDown</i></a></li>
                     <?php endif; ?>
                 <?php endif; ?>
             </ul>
@@ -117,7 +117,21 @@ AppAsset::register($this);
     </div>
 </div>
 
-<?= $content ?>
+<section class="content">
+    <?php
+    $message = Yii::$app->session->getFlash('message');
+    if (isset($message) && !empty($message)): ?>
+        <div class="alert alert-<?= $message['type'] ?>">
+            <a href="#" class="close" data-dismiss="alert">
+                &times;
+            </a>
+            <h4>温馨提示</h4>
+            <?= $message['msg'] ?>
+        </div>
+    <?php endif; ?>
+
+    <?= $content ?>
+</section>
 
 
 <footer class="navbar-default footer ">
@@ -129,6 +143,7 @@ AppAsset::register($this);
 
     </div>
 </footer>
+
 
 <?php $this->endBody() ?>
 </body>
