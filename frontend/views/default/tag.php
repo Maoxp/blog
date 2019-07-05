@@ -27,16 +27,24 @@ if (isset($css_list)) {
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-9">
-            <div class="row">
-                <?php foreach ($rows as $k => $row): ?>
-                    <div class="col-xs-6 col-lg-4">
-                        <h2><?= $row['name'] ?></h2>
-                        <p class="label label-info">文章数：<?= $row['aticle_count'] ?> </p>
-                        <p><a class="btn btn-default" href="<?= Url::to(['default/list', 'type'=> 'tag', "keyword" => $row['id']]) ?>" role="button">详情 »</a></p>
+        <style>
+
+        </style>
+        <?php foreach ($rows as $k => $row): ?>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="thumbnail" style="height: 336px;">
+                    <a href="<?= Url::to(['default/list', 'type'=> 'tag', "keyword" => $row['id']]) ?>" title="" target="_blank">
+                        <img class="lazy" src="http://mxp.blog/img/about-bg.jpg" width="300" height="150"  alt="图片" style="max-width:100%">
+                    </a>
+                    <div class="caption">
+                        <h3>
+                            <a href="https://www.nextjs.cn/" title=""><?= $row['name'] ?></a>
+                        </h3> <small class="label label-default"><?= $row['aticle_count'] ?></small>
+                        <br>
+                        <p><a class="btn btn-default" href="<?= Url::to(['default/list', 'type'=> 'tag', "keyword" => $row['id']]) ?>" role="button" style="float: right;">详情 »</a></p>
                     </div>
-                <?php endforeach; ?>
+                </div>
             </div>
-        </div>
+        <?php endforeach; ?>
     </div>
 </div>
