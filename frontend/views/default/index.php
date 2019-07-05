@@ -70,34 +70,44 @@ if (isset($css_list)) {
         </div>-->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-            <div class="sidebar-module sidebar-module-inset">
-                <h4>About me</h4>
-                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            <style>
+                .right-title {
+                    padding: 0 15px;
+                    background: #f4f4f4;
+                    line-height: 2;
+                }
+                .list-unstyled {
+                    padding-left: 30px;
+                }
+                .list-unstyled  li  {
+                    padding-top: 10px;
+                }
+                .wx-img {
+                    height:134px;
+                    background-image: url('img/wx.png');
+                    background-repeat: no-repeat;
+                    background-position: 20% 10%;
+                }
+            </style>
+            <div class="sidebar-module sidebar-module-inset" style="padding: 26px 0;">
+                <h4 class="right-title">Become friends <i class="fa fa-weixin"></i></h4>
+                <p class="wx-img"></p>
+            </div>
+            <div class="sidebar-module" style="padding-bottom: 20px">
+                <h4 class="right-title">Archives</h4>
+                <ul class="list-unstyled">
+                    <?php foreach ($article_date as $item): ?>
+                    <li><a href="<?= Url::to(['default/list','type'=>'date', 'keyword' => $item['created']])?>"><?= $item['created'] ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
             <div class="sidebar-module">
-                <h4>Archives</h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">March 2014</a></li>
-                    <li><a href="#">February 2014</a></li>
-                    <li><a href="#">January 2014</a></li>
-                    <li><a href="#">December 2013</a></li>
-                    <li><a href="#">November 2013</a></li>
-                    <li><a href="#">October 2013</a></li>
-                    <li><a href="#">September 2013</a></li>
-                    <li><a href="#">August 2013</a></li>
-                    <li><a href="#">July 2013</a></li>
-                    <li><a href="#">June 2013</a></li>
-                    <li><a href="#">May 2013</a></li>
-                    <li><a href="#">April 2013</a></li>
-                </ol>
-            </div>
-            <div class="sidebar-module">
-                <h4>Elsewhere</h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Facebook</a></li>
-                </ol>
+                <h4 class="right-title">友情链接</h4>
+                <ul class="list-unstyled">
+                    <li><a href="https://github.com/" target="_blank">GitHub</a></li>
+                    <li><a href="https://v3.bootcss.com/" target="_blank">Bootstrap3中文文档</a></li>
+                    <li><a href="https://v4.bootcss.com/" target="_blank">Bootstrap4中文文档</a></li>
+                </ul>
             </div>
         </div>
     </div>

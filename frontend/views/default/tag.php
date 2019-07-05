@@ -6,7 +6,7 @@
  * Time: 11:12
  */
 
-$this->title = '首页';
+$this->title = '归档';
 
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
@@ -33,7 +33,7 @@ if (isset($css_list)) {
                     <div class="col-xs-6 col-lg-4">
                         <h2><?= $row['name'] ?></h2>
                         <p class="label label-info">文章数：<?= $row['aticle_count'] ?> </p>
-                        <p><a class="btn btn-default" href="<?= Url::to(['default/list', 'id'=> $row['id']]) ?>" role="button">详情 »</a></p>
+                        <p><a class="btn btn-default" href="<?= Url::to(['default/list', 'type'=> 'tag', "keyword" => $row['id']]) ?>" role="button">详情 »</a></p>
                     </div>
                 <?php endforeach; ?>
             </div>

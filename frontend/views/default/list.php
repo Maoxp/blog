@@ -6,7 +6,7 @@
  * Time: 11:12
  */
 
-$this->title = '首页';
+$this->title = '列表';
 
 use frontend\assets\AppAsset;
 use yii\helpers\Url;

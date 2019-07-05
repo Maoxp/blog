@@ -35,9 +35,15 @@ class DefaultController extends Controller
         $total = Yii::$app->db->createCommand("select found_rows() as total")->queryOne();
 
         $pagination = Common::createPage($total['total'], $pageSize);
+
+        $article_date = Yii::$app->db->createCommand("SELECT DISTINCT DATE_FORMAT(FROM_UNIXTIME(created),'%Y-%m-%d') as created FROM db_article WHERE `status` =1")->queryAll();
+
+
+
         return $this->render('index', [
             'js_list' => [],
             'css_list' => [],
+            'article_date' => $article_date,
             'page' => $page,
             'pageSize' => $pageSize,
             'rows' => $rows,
@@ -94,21 +100,44 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function actionList(int $id = 0)
+    /**
+     * 聚合列表
+     * @param $type
+     * @param $keyword
+     * @return string
+     * @throws \yii\db\Exception
+     */
+    public function actionList($type, $keyword)
     {
         $this->layout = 'main-md';
-        if ($id == 0) {
+        if (empty($keyword)) {
             return $this->renderFile("@frontend/views/notification.php", [
                 "auto" => true,
                 "msg" => '缺少参数!',
                 "goto" => Url::to(['default/tag'])
             ]);
+        } else {
+            $where = "";
+            switch ($type) {
+                case "date":
+                    $start = strtotime($keyword ." 00:00:01");
+                    $end = strtotime($keyword ." 23:59:59");
+                    $where = "created between '$start' and '$end'";
+                    break;
+                case "tag":
+                    $where = "tag_id=".intval($keyword);
+                    break;
+                case "search":
+                    $where = "match(title, subtitle, content) AGAINST('{$keyword}*' in BOOLEAN MODE) ";
+                    break;
+            }
+
         }
         $page = Yii::$app->request->get('page', 1);
         $pageSize =20;
         $offset = ($page -1) * $pageSize;
 
-        $rows = Yii::$app->db->createCommand("select SQL_CALC_FOUND_ROWS * from db_article where tag_id=$id limit $offset, $pageSize")->queryAll();
+        $rows = Yii::$app->db->createCommand("select SQL_CALC_FOUND_ROWS * from db_article where {$where} limit $offset, $pageSize")->queryAll();
         $total = Yii::$app->db->createCommand("select found_rows() as total")->queryOne();
 
         $pagination = Common::createPage($total['total'], $pageSize);
