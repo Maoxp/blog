@@ -107,6 +107,7 @@ if (isset($css_list)) {
                     <li><a href="https://github.com/" target="_blank">GitHub</a></li>
                     <li><a href="https://v3.bootcss.com/" target="_blank">Bootstrap3中文文档</a></li>
                     <li><a href="https://v4.bootcss.com/" target="_blank">Bootstrap4中文文档</a></li>
+                    <li><a href="https://www.jquery123.com/" target="_blank">jQuery API</a></li>
                 </ul>
             </div>
         </div>

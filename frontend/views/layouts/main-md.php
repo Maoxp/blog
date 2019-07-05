@@ -26,11 +26,24 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <style>
-        .job-hot {
-            position: absolute;
-            color: #d9534f;
-            right: 0;
-            top: 15px;
+        .input-search {
+            padding-left: 5px;
+            border: 1px solid #ccc;
+            width: 300px;
+            height: 40px;
+            line-height: 26px;
+            background-color: #e5e5e5;
+        }
+
+        .input-submit {
+            background-color: #333;
+            color: #FFF;
+            width: 50px;
+            border: none;
+            cursor: pointer;
+            height: 40px;
+            line-height: 28px;
+            border-radius: 5px;
         }
     </style>
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
@@ -58,9 +71,6 @@ AppAsset::register($this);
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav">
                 <li class="reddot"><a href="<?= Url::to(['default/tag']) ?>">归档</a></li>
-                <li><a href="https://v3.bootcss.com/" target="_blank">Bootstrap3中文文档</a></li>
-                <li><a href="https://v4.bootcss.com/" target="_blank">Bootstrap4中文文档</a></li>
-                <li><a class="reddot" href="https://www.jquery123.com/" target="_blank">jQuery API</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right hidden-sm">
                 <?php if (Yii::$app->user->isGuest): ?>
@@ -71,6 +81,13 @@ AppAsset::register($this);
                         <li><a href="<?= Url::to(['home/edit-md']) ?>" target="_blank"><i class="fa fa-edit">MarkDown</i></a></li>
                     <?php endif; ?>
                 <?php endif; ?>
+                <li style="left: 130px;">
+                    <form action="<?= Url::to(['default/list'])?>" method="get">
+                        <input type="search" name="keyword" class="input-search" value="" placeholder="你想搜啥...">
+                        <input type="hidden" name="type" value="search">
+                        <input type="submit" class="input-submit" value="搜索">
+                    </form>
+                </li>
             </ul>
         </div>
     </div>

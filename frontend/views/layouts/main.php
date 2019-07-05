@@ -26,13 +26,6 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <style>
-        .job-hot {
-            position: absolute;
-            color: #d9534f;
-            right: 0;
-            top: 15px;
-        }
-
         .input-search {
             padding-left: 5px;
             border: 1px solid #ccc;
@@ -78,7 +71,6 @@ AppAsset::register($this);
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav">
                 <li class="reddot"><a href="<?= Url::to(['default/tag'])?>">归档</a></li>
-                <li><a href="https://www.jquery123.com/" target="_blank">jQuery API</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right hidden-sm">
                 <?php if (Yii::$app->user->isGuest): ?>
