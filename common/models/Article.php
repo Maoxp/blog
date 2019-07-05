@@ -11,7 +11,8 @@ use Yii;
  * @property string $title 文章标题
  * @property string $subtitle 子标题
  * @property string $content 文章内容
- * @property string $tag
+ * @property int $tag_id
+ * @property string $status
  * @property int $reads 浏览量
  * @property string $author 发布人名称
  * @property int $author_uid
@@ -36,8 +37,8 @@ class Article extends \yii\db\ActiveRecord
         return [
             [['content', 'author_uid'], 'required'],
             [['content'], 'string'],
-            [['reads', 'author_uid', 'created', 'flag'], 'integer'],
-            [['title', 'subtitle', 'tag', 'author'], 'string', 'max' => 255],
+            [['reads', 'author_uid', 'created', 'flag', 'status', 'tag_id'], 'integer'],
+            [['title', 'subtitle', 'author'], 'string', 'max' => 255],
         ];
     }
 
@@ -51,7 +52,7 @@ class Article extends \yii\db\ActiveRecord
             'title' => 'Title',
             'subtitle' => 'Subtitle',
             'content' => 'Content',
-            'tag' => 'Tag',
+            'tag_id' => 'tag_id',
             'reads' => 'Reads',
             'author' => 'Author',
             'author_uid' => 'Author Uid',

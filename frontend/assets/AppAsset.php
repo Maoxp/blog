@@ -17,12 +17,14 @@ class AppAsset extends AssetBundle
         'resource/bootstrap/css/bootstrap.theme.css',
         'resource/font-awesome/css/font-awesome.min.css',
         'css/site.min.css',
+        "resource/chosen/chosen.min.css"
     ];
     public $js = [
         'resource/jquery/jquery.min.js',
         'resource/bootstrap/js/bootstrap.min.js',
         'js/common.js',
         'https://cdn.jsdelivr.net/npm/sweetalert2@7.32.4/dist/sweetalert2.all.min.js',
+        "resource/chosen/chosen.jquery.min.js"
     ];
 
     public $depends = [

@@ -37,7 +37,7 @@ $markdown = new MarkDowner();
         <li class="list-inline-item text-small text-muted">7205 字
         </li>
         <li class="list-inline-item text-small text-muted">
-            1678 阅读
+            <?= $model['reads']; ?>阅读
         </li>
         <li class="list-inline-item text-small text-muted">
             13 评论
@@ -47,7 +47,7 @@ $markdown = new MarkDowner();
         <div class="col-lg-8 col-md-10 mx-auto">
             <div id="markdown">
                 <?php
-                echo $markdown->convertMarkdownToHtml($model->content);
+                echo $markdown->convertMarkdownToHtml($model['content']);
                 ?>
             </div>
         </div>

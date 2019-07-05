@@ -9,10 +9,12 @@
 namespace frontend\controllers;
 
 use frontend\dao\ArticleDao;
+use frontend\dao\TagDao;
 use frontend\service\Common;
 use frontend\service\Uploader;
 use Yii;
 use yii\web\Controller;
+use yii\helpers\Url;
 
 class DefaultController extends Controller
 {
@@ -20,15 +22,24 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        $rows = Yii::$app->db->createCommand("select SQL_CALC_FOUND_ROWS * from db_article")->queryAll();
-        $total= Yii::$app->db->createCommand("select found_rows() as total")->queryOne();
+        $page = Yii::$app->request->get('page', 1);
+        $pageSize =7;
+        $offset = ($page -1) * $pageSize;
 
-        $pagination = Common::createPage($total['total'], 10);
-        return $this->render('index',[
+        if (Yii::$app->user->isGuest) {
+            $where = "where status=1";
+        } else {
+            $where = "";
+        }
+        $rows = Yii::$app->db->createCommand("select SQL_CALC_FOUND_ROWS * from db_article {$where} limit $offset, $pageSize")->queryAll();
+        $total = Yii::$app->db->createCommand("select found_rows() as total")->queryOne();
+
+        $pagination = Common::createPage($total['total'], $pageSize);
+        return $this->render('index', [
             'js_list' => [],
             'css_list' => [],
-            'page' => 1,
-            'pageSize' => 10,
+            'page' => $page,
+            'pageSize' => $pageSize,
             'rows' => $rows,
             'total' => $total['total'],
             'pagination' => $pagination
@@ -43,15 +54,15 @@ class DefaultController extends Controller
     public function actionDetail($id)
     {
         $model = ArticleDao::findOne($id);
-        $front_model = ArticleDao::findOne($id-1);
-        $back_model = ArticleDao::findOne($id+1);
+        $model->reads += 1;
+        $model->save();
 
-        return $this->render("detail",[
+        return $this->render("detail", [
             "js_list" => [],
             "css_list" => [],
             "model" => $model,
-            "front_model" => $front_model,
-            "back_model" => $back_model,
+            "front_model" => ArticleDao::findOne($id - 1),
+            "back_model" => ArticleDao::findOne($id + 1),
         ]);
     }
 
@@ -61,12 +72,11 @@ class DefaultController extends Controller
      */
     public function actionUpload()
     {
-        if (Yii::$app->request->isPost)
-        {
+        if (Yii::$app->request->isPost) {
             $upFile = new Uploader("editormd-image-file");
             $res = $upFile->do_load();
             if ($res) {
-                return json_encode(['success' => 1, "message" => $upFile->stateInfo, "url" => Yii::$app->request->hostInfo.$res]);
+                return json_encode(['success' => 1, "message" => $upFile->stateInfo, "url" => Yii::$app->request->hostInfo . $res]);
             } else {
                 return json_encode(['success' => 0, "message" => "ok", "url" => ""]);
             }
@@ -74,9 +84,43 @@ class DefaultController extends Controller
     }
 
     //归档
-    public function actionList()
+    public function actionTag()
     {
+        $rows = TagDao::find()->select("id, name, aticle_count")->all();
+        return $this->render("tag", [
+            "js_list" => [],
+            "css_list" => [],
+            "rows" => $rows
+        ]);
+    }
 
+    public function actionList(int $id = 0)
+    {
+        $this->layout = 'main-md';
+        if ($id == 0) {
+            return $this->renderFile("@frontend/views/notification.php", [
+                "auto" => true,
+                "msg" => '缺少参数!',
+                "goto" => Url::to(['default/tag'])
+            ]);
+        }
+        $page = Yii::$app->request->get('page', 1);
+        $pageSize =20;
+        $offset = ($page -1) * $pageSize;
+
+        $rows = Yii::$app->db->createCommand("select SQL_CALC_FOUND_ROWS * from db_article where tag_id=$id limit $offset, $pageSize")->queryAll();
+        $total = Yii::$app->db->createCommand("select found_rows() as total")->queryOne();
+
+        $pagination = Common::createPage($total['total'], $pageSize);
+        return $this->render('list', [
+            'js_list' => [],
+            'css_list' => [],
+            'page' => $page,
+            'pageSize' => $pageSize,
+            'rows' => $rows,
+            'total' => $total['total'],
+            'pagination' => $pagination
+        ]);
     }
 
 

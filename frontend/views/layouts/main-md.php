@@ -57,7 +57,7 @@ AppAsset::register($this);
         </div>
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav">
-                <li class="reddot"><a href="">归档</a></li>
+                <li class="reddot"><a href="<?= Url::to(['default/tag']) ?>">归档</a></li>
                 <li><a href="https://v3.bootcss.com/" target="_blank">Bootstrap3中文文档</a></li>
                 <li><a href="https://v4.bootcss.com/" target="_blank">Bootstrap4中文文档</a></li>
                 <li><a class="reddot" href="https://www.jquery123.com/" target="_blank">jQuery API</a></li>
@@ -79,8 +79,8 @@ AppAsset::register($this);
     <div class="container">
         <ul class="bc-social-buttons">
             <li class="social-forum">
-                <a class="" href="http://wenda.bootcss.com" title="Bootstrap问答社区" target="_blank">
-                    <i class="fa fa-comments"></i>广告引流入口
+                <a class="" href="https://github.com/Maoxp" title="Bootstrap问答社区" target="_blank">
+                    <i class="fa fa-github"> github</i>
                 </a>
             </li>
             <li class="social-weibo">

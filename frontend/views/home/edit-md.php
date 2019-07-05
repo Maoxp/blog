@@ -7,6 +7,7 @@ $this->title = '编辑';
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
 use yii\web\View;
+
 //use yii\helpers\Html;
 //use yii\widgets\ActiveForm;
 
@@ -22,6 +23,7 @@ if (isset($css_list)) {
         AppAsset::addCss($this, Url::home() . $href);
     }
 }
+
 ?>
 <!-- Main Content -->
 <div class="container">
@@ -32,7 +34,7 @@ if (isset($css_list)) {
                 <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">append归档标签</button>
             </div>
             <div style="margin-top: 100px;">
-                <form action="/home/edit-md" method="post">
+                <form action="<?= $action?>" method="post">
                     <div class="form-group">
                         <label for="" class="control-label">标题</label>
                         <input type="text" class="form-control" name="title" required
@@ -45,11 +47,30 @@ if (isset($css_list)) {
                     </div>
                     <div class="form-group">
                         <label for="" class="control-label">标签</label>
+                        <select name="tag_id" id="tag_id" class="selected chosen-select" data-placeholder="请选择">
+                            <option value="">请选择</option>
+                            <?php foreach ($tag as $key => $item): ?>
+                                <option value="<?= $item['id'];?>"
+                                    <?= isset($keyword['tag_id']) && ($keyword['tag_id'] == $item['id']) ? "selected": '' ?> ><?= $item['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label">可见范围</label>
+                        <div>
+                            <label class="radio-inline">
+                                <input type="radio"  value="1" name="status" <?php if (isset($keyword['status']) && intval($keyword['status']) == 1) echo "checked"?> >公开
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio"  value="-1" name="status" <?php if (isset($keyword['status']) && intval($keyword['status']) == -1) echo "checked"?>>私密
+                            </label>
+                        </div>
+                    </div>
+
                     <label for="" class="control-label">内容</label>
                     <div class="form-group" id="editor">
-                    <textarea style="display:none;"
-                              name="editor_markdown_code"><?= $keyword['content'] ?? '' ?></textarea>
+                        <textarea style="display:none;" name="editor_markdown_code"><?= $keyword['content'] ?? '' ?></textarea>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-success">提交</button>
@@ -88,9 +109,16 @@ if (isset($css_list)) {
     </div>
 </div>
 <script>
-<?php $this->beginBlock('js_end') ?>
-    $(function() {
-        $("#tag-form").click(function() {
+    <?php $this->beginBlock('js_end') ?>
+    $(function () {
+        $(".chosen-select").chosen({
+            disable_search_threshold: 9,   //当选项小于10个隐藏搜索
+            allow_single_deselect: true,    //允许取消选择单个选择
+            no_results_text: "没有找到匹配的结果",
+            width: "100%"
+        });
+
+        $("#tag-form").click(function () {
             let tagName = $("input[name='tagName']").val();
             if (tagName === '') {
                 Swal({title: "温馨提醒", html: "<h5>标签不能为空!</h5>", type: "warning"})
@@ -120,7 +148,7 @@ if (isset($css_list)) {
             }
         });
     });
-<?php $this->endBlock(); ?>
+    <?php $this->endBlock(); ?>
 </script>
 
 <?php $this->registerJs($this->blocks['js_end'], View::POS_END); ?>
