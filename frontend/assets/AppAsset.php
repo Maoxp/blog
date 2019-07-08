@@ -14,7 +14,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'resource/bootstrap/css/bootstrap.min.css',
-        'resource/bootstrap/css/bootstrap.theme.css',
+        'resource/bootstrap/css/bootstrap-theme.css',
         'resource/font-awesome/css/font-awesome.min.css',
         'css/site.min.css',
         "resource/chosen/chosen.min.css"
