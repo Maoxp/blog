@@ -53,12 +53,19 @@ class DefaultController extends Controller
     }
 
     /**
-     * 文章详情
+     *  文章详情
      * @param $id
      * @return string
+     * @throws \yii\db\Exception
      */
     public function actionDetail($id)
     {
+        $d = [
+            "ip" => Yii::$app->getRequest()->getUserIP(),
+            "created" => time(),
+            "article_id" => $id
+        ];
+        Yii::$app->db->createCommand()->insert("db_guest", $d)->execute();
         $model = ArticleDao::findOne($id);
         $model->reads += 1;
         $model->save();

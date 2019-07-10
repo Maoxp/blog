@@ -25,7 +25,7 @@ $markdown = new MarkDowner();
 <!-- Main Content -->
 <div class="container">
     <h1 style="font-weight: 600"><?= $model->title?></h1>
-    <?php if (!Yii::$app->getUser()->isGuest):?>
+    <?php if (!Yii::$app->getUser()->isGuest && Yii::$app->getUser()->identity->getId() == 1):?>
     <div>
         <a href="<?= Url::to(['home/edit-md', 'id' => $model->id])?>" role="button"  class="btn btn-success"> <i class="fa fa-edit"></i>在线修改</a>
     </div>
