@@ -15,7 +15,6 @@ use yii\helpers\Url;
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <?= Html::csrfMetaTags() ?>
         <title><?= $this->title ?> · Blog</title>
-        <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <?php $this->head() ?>
