@@ -54,20 +54,6 @@ if (isset($css_list)) {
             <?php endforeach; ?>
         </div>
 
-        <!--<div class="col-xs-3 col-sm-3 col-lg-4 col-md-6">
-            <div class="list-group">
-                <a href="#" class="list-group-item active">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-                <a href="#" class="list-group-item">Link</a>
-            </div>
-        </div>-->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
             <style>
@@ -90,7 +76,11 @@ if (isset($css_list)) {
                 }
             </style>
             <div class="sidebar-module sidebar-module-inset" style="padding: 26px 0;">
-                <h4 class="right-title">Become friends <i class="fa fa-weixin"></i></h4>
+                <h4 class="right-title">Become friend <i class="fa fa-weixin"></i><label>旭尧</label> </h4>
+                <div style="padding: 0 40px">
+                    <label class="label label-info">● 爱好比较杂，日记比较乱</label>
+                    <label class="label label-info">● 专注web后端开发</label>
+                </div>
                 <p class="wx-img"></p>
             </div>
             <div class="sidebar-module" style="padding-bottom: 20px">
