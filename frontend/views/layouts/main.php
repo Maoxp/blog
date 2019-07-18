@@ -153,8 +153,7 @@ AppAsset::register($this);
 <footer class="navbar-default footer ">
     <div class="container">
         <ul class="list-inline text-center">
-            <li><a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备11008151号</a></li>
-            <li>京公网安备11010802014853</li>
+            <li><a href="http://www.miibeian.gov.cn/" target="_blank">苏ICP备17018778号</a></li>
         </ul>
 
     </div>
