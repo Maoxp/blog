@@ -13,7 +13,13 @@ use yii\widgets\LinkPager;
 
 trait Common
 {
-    //分页
+    /**
+     * 分页
+     * @param $count
+     * @param $pageSize
+     * @return string
+     * @throws \Exception
+     */
     public static function createPage($count, $pageSize)
     {
         $pages = new Pagination(['totalCount' => $count, 'pageSize' => $pageSize, 'pageSizeParam' => 'pageSize' ]);

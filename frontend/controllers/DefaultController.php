@@ -20,8 +20,15 @@ class DefaultController extends Controller
 {
     use Common;
 
+    /**
+     * @return string
+     * @throws \yii\db\Exception
+     */
     public function actionIndex()
     {
+        $upload_file_dir = Yii::getAlias(Yii::$app->params['uploadFile']). date("Y-m-d", time());
+        var_export($upload_file_dir);
+
         $page = Yii::$app->request->get('page', 1);
         $pageSize =7;
         $offset = ($page -1) * $pageSize;
