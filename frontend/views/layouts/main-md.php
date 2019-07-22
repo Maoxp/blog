@@ -25,27 +25,6 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <style>
-        .input-search {
-            padding-left: 5px;
-            border: 1px solid #ccc;
-            width: 300px;
-            height: 40px;
-            line-height: 26px;
-            background-color: #e5e5e5;
-        }
-
-        .input-submit {
-            background-color: #333;
-            color: #FFF;
-            width: 50px;
-            border: none;
-            cursor: pointer;
-            height: 40px;
-            line-height: 28px;
-            border-radius: 5px;
-        }
-    </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -73,21 +52,24 @@ AppAsset::register($this);
             </ul>
             <ul class="nav navbar-nav navbar-right hidden-sm">
                 <?php if (Yii::$app->user->isGuest): ?>
-                    <li><a href="<?= Url::to(['site/login']) ?>" target="_blank">Login</a></li>
+                    <li><a href="<?= Url::to(['site/login']) ?>" target="_blank">登录</a></li>
                 <?php else: ?>
-                    <li><a href="<?= Url::to(['site/logout']) ?>">Logout</a></li>
+                    <li><a href="<?= Url::to(['site/logout']) ?>">退出</a></li>
                     <?php if (Yii::$app->getUser()->identity->email == 'maoxingpei8686@163.com') :?>
                         <li><a href="<?= Url::to(['home/edit-md']) ?>" target="_blank"><i class="fa fa-edit">MarkDown</i></a></li>
                     <?php endif; ?>
                 <?php endif; ?>
-                <li style="left: 130px;">
-                    <form action="<?= Url::to(['default/list'])?>" method="get">
-                        <input type="search" name="keyword" class="input-search" value="" placeholder="你想搜啥...">
-                        <input type="hidden" name="type" value="search">
-                        <input type="submit" class="input-submit" value="搜索">
-                    </form>
-                </li>
             </ul>
+            <form class="navbar-form navbar-right" action="<?= Url::to(['default/list']) ?>" method="get">
+                <div class="input-group">
+                    <input type="search" name="keyword" value="" class="input-search form-control" placeholder="搜索文章">
+                    <input type="hidden" name="type" value="search">
+                    <a class="clear"></a>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -107,21 +89,22 @@ AppAsset::register($this);
     </div>
 </div>
 
-<section class="content">
-    <?php
-    $message = Yii::$app->session->getFlash('message');
-    if (isset($message) && !empty($message)): ?>
-        <div class="alert alert-<?= $message['type'] ?>">
-            <a href="#" class="close" data-dismiss="alert">
-                &times;
-            </a>
-            <h4>温馨提示</h4>
-            <?= $message['msg'] ?>
-        </div>
-    <?php endif; ?>
+    <section class="content">
+        <?php
+        $message = Yii::$app->session->getFlash('message');
+        if (isset($message) && !empty($message)): ?>
+            <div class="alert alert-<?= $message['type'] ?>">
+                <a href="#" class="close" data-dismiss="alert">
+                    &times;
+                </a>
+                <h4>温馨提示</h4>
+                <?= $message['msg'] ?>
+            </div>
+        <?php endif; ?>
 
-    <?= $content ?>
-</section>
+        <?= $content ?>
+    </section>
+</div>
 
 <?php $this->endBody() ?>
 </body>
