@@ -109,7 +109,7 @@ class Uploader
            if (strtoupper(substr(PHP_OS, 0,3))==='WIN') {
                $upload_file_dir=Yii::getAlias(Yii::$app->params['uploadFile']). date("Y-m-d", time());
            } else {
-               $upload_file_dir = "/root/lnmp-dockerfiles/app/blog/frontend/web/upload/". date("Y-m-d", time());
+               $upload_file_dir=Yii::getAlias(Yii::$app->params['uploadFile']). date("Y-m-d", time());
            }
 
             if (!file_exists($upload_file_dir) && !mkdir($upload_file_dir, 0777, true)) {
