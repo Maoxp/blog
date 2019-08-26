@@ -106,8 +106,11 @@ class Uploader
         if (!in_array($file_ext, ["jpg", "jpeg", "gif", "png", "bmp", "webp"]))
             throw new \Throwable("上传格式不在范围");
         else {
-            $upload_file_dir = "/root/lnmp-dockerfiles/app/blog/frontend/web/upload/". date("Y-m-d", time());
-            //Yii::getAlias(Yii::$app->params['uploadFile']). date("Y-m-d", time());
+           if (strtoupper(substr(PHP_OS, 0,3))==='WIN') {
+               $upload_file_dir=Yii::getAlias(Yii::$app->params['uploadFile']). date("Y-m-d", time());
+           } else {
+               $upload_file_dir = "/root/lnmp-dockerfiles/app/blog/frontend/web/upload/". date("Y-m-d", time());
+           }
 
             if (!file_exists($upload_file_dir) && !mkdir($upload_file_dir, 0777, true)) {
                 $this->stateInfo = $this->getStateInfo("ERROR_CREATE_DIR");
