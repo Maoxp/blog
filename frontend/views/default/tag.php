@@ -32,7 +32,7 @@ if (isset($css_list)) {
         </style>
         <?php foreach ($rows as $k => $row): ?>
             <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="thumbnail" style="height: 336px;">
+                <div class="thumbnail" style="height: 298px;">
                     <a href="<?= Url::to(['default/list', 'type'=> 'tag', "keyword" => $row['id']]) ?>" title="" target="_blank">
                         <?php
                             switch ((int)$row['id']) {
@@ -61,7 +61,7 @@ if (isset($css_list)) {
                                     $src = "/img/about-bg.jpg";
                             }
                         ?>
-                        <img class="lazy" src="<?= $src; ?>" width="300" height="150"  alt="图片" style="max-width:100%">
+                        <img class="lazy" src="<?= $src; ?>" alt="图片" style="max-width:100%; height: 150px">
                     </a>
                     <div class="caption">
                         <h3>
