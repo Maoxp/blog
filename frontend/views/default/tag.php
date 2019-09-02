@@ -34,7 +34,34 @@ if (isset($css_list)) {
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <div class="thumbnail" style="height: 336px;">
                     <a href="<?= Url::to(['default/list', 'type'=> 'tag', "keyword" => $row['id']]) ?>" title="" target="_blank">
-                        <img class="lazy" src="/img/about-bg.jpg" width="300" height="150"  alt="图片" style="max-width:100%">
+                        <?php
+                            switch ((int)$row['id']) {
+                                case 1:
+                                    $src = "/img/tag/php.jpg";
+                                    break;
+                                case 2:
+                                    $src = "/img/tag/python.jpg";
+                                    break;
+                                case 3:
+                                    $src = "/img/tag/mysql.jpg";
+                                    break;
+                                case 4:
+                                    $src = "/img/tag/linux.jpg";
+                                    break;
+                                case 5:
+                                    $src = "/img/tag/composer.jpg";
+                                    break;
+                                case 6:
+                                    $src = "/img/tag/git.jpg";
+                                    break;
+                                case 8:
+                                    $src = "/img/tag/html_css_jq.jpg";
+                                    break;
+                                default:
+                                    $src = "/img/about-bg.jpg";
+                            }
+                        ?>
+                        <img class="lazy" src="<?= $src; ?>" width="300" height="150"  alt="图片" style="max-width:100%">
                     </a>
                     <div class="caption">
                         <h3>

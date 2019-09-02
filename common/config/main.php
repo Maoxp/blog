@@ -11,7 +11,7 @@ return [
         ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=blog',
+            'dsn' => 'mysql:host=127.0.0.1;dbname=blog',
             'username' => 'root',
             'password' => 'mxp123456',
             'charset' => 'utf8',
