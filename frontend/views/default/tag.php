@@ -61,7 +61,7 @@ if (isset($css_list)) {
                                     $src = "/img/about-bg.jpg";
                             }
                         ?>
-                        <img class="lazy" src="<?= $src; ?>" alt="图片" style="max-width:100%; height: 150px">
+                        <img class="lazy" src="<?= $src; ?>" alt="图片" style="max-width:100%;width: 300px;height: 150px">
                     </a>
                     <div class="caption">
                         <h3>
