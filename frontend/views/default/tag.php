@@ -58,7 +58,7 @@ if (isset($css_list)) {
                                     $src = "/img/tag/html_css_jq.jpg";
                                     break;
                                 default:
-                                    $src = "/img/about-bg.jpg";
+                                    $src = "/img/home-bg.jpg";
                             }
                         ?>
                         <img class="lazy" src="<?= $src; ?>" alt="图片" style="max-width:100%;width: 300px;height: 150px">
