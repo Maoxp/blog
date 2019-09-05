@@ -96,7 +96,7 @@ class HomeController extends BaseController
             'js_list' => ["resource/editormd/editormd.js", "js/home/edit-md.js"],
             'css_list' => ["resource/editormd/css/editormd.min.css"],
             "keyword" => $keyword,
-            "action" => $id ? "/home/edit-md?id=1" : "/home/edit-md",
+            "action" => $id ? "/home/edit-md?id=$id" : "/home/edit-md",
             "tag" => TagDao::find()->select("id, name")->all()
         ]);
     }
