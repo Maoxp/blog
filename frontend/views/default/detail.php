@@ -7,6 +7,7 @@ $this->title = '查看';
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
 use frontend\service\MarkDowner;
+use yii\web\View;
 
 AppAsset::register($this);
 
@@ -24,7 +25,7 @@ $markdown = new MarkDowner();
 ?>
 <!-- Main Content -->
 <div class="container">
-    <h1 style="font-weight: 600"><?= $model->title?></h1>
+    <h1 style="font-weight: 600"><?= $model->title; ?></h1>
     <?php if (!Yii::$app->getUser()->isGuest && Yii::$app->getUser()->identity->getId() == 1):?>
     <div>
         <a href="<?= Url::to(['home/edit-md', 'id' => $model->id])?>" role="button"  class="btn btn-success"> <i class="fa fa-edit"></i>在线修改</a>
@@ -34,13 +35,13 @@ $markdown = new MarkDowner();
         <li class="list-inline-item text-small text-muted">
            2019-06-27
         </li>
-        <li class="list-inline-item text-small text-muted">7205 字
+        <li class="list-inline-item text-small text-muted"><?= strlen($model['content']); ?> 字
         </li>
         <li class="list-inline-item text-small text-muted">
             <?= $model['reads']; ?>阅读
         </li>
         <li class="list-inline-item text-small text-muted">
-            13 评论
+            0 评论
         </li>
     </ul>
     <div class="row" style=" font-size: 15px !important;">
@@ -80,7 +81,7 @@ $(function() {
 });
 js;
 
-$this->registerJs($js);
+$this->registerJs($js, View::POS_END);
 ?>
 
 
