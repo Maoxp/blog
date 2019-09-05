@@ -70,7 +70,7 @@ if (isset($css_list)) {
                 }
                 .wx-img {
                     height:134px;
-                    background-image: url('img/wx.png');
+                    background-image: url(<?= Url::home().'img/wx.png'?>);
                     background-repeat: no-repeat;
                     background-position: 20% 10%;
                 }
